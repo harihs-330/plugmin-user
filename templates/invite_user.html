@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Plugmin</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f7fb;
+            margin: 0;
+            padding: 0;
+            color: #444;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e3e6ea;
+        }
+        .header {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .header p {
+            margin: 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+        }
+        .content h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        .button {
+            display: inline-block;
+            width: auto;
+            padding: 15px 30px;
+            color: #ffffff;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .button:hover {
+            background: linear-gradient(90deg, #2980b9, #3498db);
+            transform: scale(1.05);
+        }
+        .footer {
+            background: #f3f7fb;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Welcome to Plugmin!</h1>
+            <p>Your journey starts here</p>
+        </div>
+        <!-- Content Section -->
+        <div class="content">
+            <h2>Hello,</h2>
+            <p>
+                We're thrilled to have you on <strong>Plugmin</strong>, your go-to platform for seamless collaboration and project management.
+            </p>
+            <p>
+                {{if .IsNewUser}}
+                    To get started, create an account by clicking the button below. Let’s build something amazing together!
+                {{else}}
+                    You've been granted permissions to collaborate on this project. Click the button below to access your project and start contributing.
+                {{end}}
+            </p>
+            <a href="{{.SignupLink}}" class="button">
+                {{if .IsNewUser}} Join {{else}} 🚀 Continue {{end}}
+            </a>
+        </div>
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>If you have any questions, reach out to us at <a href="mailto:support@plugmin.com">support@plugmin.com</a>.</p>
+            <p>Cheers,</p>
+            <p><strong>The Plugmin Team</strong></p>
+        </div>
+    </div>
+</body>
+</html>

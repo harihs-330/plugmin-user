@@ -1,0 +1,48 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8080"
+    restart: "always"
+    env_file:
+      - .env
+    environment:
+      - PLUGMIN_USER_DEBUG=${PLUGMIN_USER_DEBUG}
+      - PLUGMIN_USER_PORT=${PLUGMIN_USER_PORT}
+      - PLUGMIN_USER_ACCEPTED_VERSIONS=${PLUGMIN_USER_ACCEPTED_VERSIONS}
+      - PLUGMIN_USER_DB_USER=${PLUGMIN_USER_DB_USER}
+      - PLUGMIN_USER_DB_PORT=${PLUGMIN_USER_DB_PORT}
+      - PLUGMIN_USER_DB_PASSWORD=${PLUGMIN_USER_DB_PASSWORD}
+      - PLUGMIN_USER_DB_DATABASE=${PLUGMIN_USER_DB_DATABASE}
+      - PLUGMIN_USER_DB_SCHEMA=${PLUGMIN_USER_DB_SCHEMA}
+      - PLUGMIN_USER_DB_HOST=postgres_container_user
+      - PLUGMIN_USER_DB_SSLMODE=${PLUGMIN_USER_DB_SSLMODE}
+      - PLUGMIN_USER_USER_URL=${PLUGMIN_USER_USER_URL}
+      - PLUGMIN_USER_SECRET_KEY= ${PLUGMIN_USER_SECRET_KEY}
+    depends_on:
+      - postgresdb
+    networks:
+      - plugmin-network
+
+  postgresdb:
+    image: postgres:latest
+    container_name: postgres_container_user
+    environment:
+      - POSTGRES_USER=${PLUGMIN_USER_DB_USER}
+      - POSTGRES_PASSWORD=${PLUGMIN_USER_DB_PASSWORD}
+      - POSTGRES_DB=${PLUGMIN_USER_DB_DATABASE}
+    ports:
+      - '5440:5432' 
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - plugmin-network
+
+networks:
+  plugmin-network:
+    driver: bridge
+
+volumes:
+  pg_data:
